@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- SMS Jobs Start -->
+	<bean name="SchooltrixSMSJob" class="org.springframework.scheduling.quartz.JobDetailBean">		
+		<property name="jobClass" value="com.schooltrix.engine.SMSCampaignJobInit" />	
+	</bean>
+	
+	<bean id="cronSchooltrixSMSJob" class="org.springframework.scheduling.quartz.CronTriggerBean">		
+		<property name="jobDetail" ref="SchooltrixSMSJob" />
+		<!-- <property name="cronExpression" value="0/30 * * * * ? * MON-FRI"  /> -->
+		<property name="cronExpression" value="0 34 12 ? * MON-SUN" />
+	</bean>
+	
+	
+	  <!-- Email Jobs Start -->
+	<bean name="SchooltrixEmailJob" class="org.springframework.scheduling.quartz.JobDetailBean">		
+		<property name="jobClass" value="com.schooltrix.engine.EmailCampaignJobInit" />	
+	</bean>
+	
+	<bean id="cronSchooltrixEmailJob" class="org.springframework.scheduling.quartz.CronTriggerBean">		
+		<property name="jobDetail" ref="SchooltrixEmailJob" />
+		<!-- <property name="cronExpression" value="0/30 * * * * ? * MON-FRI"  /> -->
+		<property name="cronExpression" value="31 56 23 ? * MON-SUN" />
+	</bean>
+	
+	  <!--Upload Doc SMS Jobs Start -->
+	<bean name="UploadSMSJob" class="org.springframework.scheduling.quartz.JobDetailBean">		
+		<property name="jobClass" value="com.schooltrix.engine.UploadDocJobInit" />
+			<property name="jobDataAsMap">
+	    	<map>
+			     <entry key="channel" value="sms" />
+	    	</map>
+	  		</property>	
+	</bean>
+	
+	<bean id="cronUploadDocSMSJob" class="org.springframework.scheduling.quartz.CronTriggerBean">		
+		<property name="jobDetail" ref="UploadSMSJob" />
+		<!-- <property name="cronExpression" value="0/30 * * * * ? * MON-FRI"  /> -->
+		<property name="cronExpression" value="0 34 12 ? * MON-SUN" />
+	</bean>
+	
+		  <!--Upload Doc Email Jobs Start -->
+	<bean name="UploadEmailJob" class="org.springframework.scheduling.quartz.JobDetailBean">		
+		<property name="jobClass" value="com.schooltrix.engine.UploadDocJobInit" />	
+			<property name="jobDataAsMap">
+	    	<map>
+			    <entry key="channel" value="email" />
+	    	</map>
+	  		</property>
+	</bean>
+	
+	<bean id="cronUploadDocEmailJob" class="org.springframework.scheduling.quartz.CronTriggerBean">		
+		<property name="jobDetail" ref="UploadEmailJob" />
+		<!-- <property name="cronExpression" value="0/30 * * * * ? * MON-FRI"  /> -->
+		<property name="cronExpression" value="0 34 12 ? * MON-SUN" />
+	</bean>
+	
+	
+	
+	
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>		
+			<!-- <ref bean="cronSchooltrixSMSJob" />		 -->
+<!-- 			<ref bean="cronUploadDocSMSJob" />		 -->
+		
+			<ref bean="cronSchooltrixEmailJob" />		
+			<!-- <ref bean="cronUploadDocEmailJob" />		 -->
+					
+			</list>
+		</property>
+	</bean>
+	
+	
+
+</beans>

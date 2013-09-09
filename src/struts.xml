@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+ <constant name="struts.devMode" value="true" />
+
+<!--  <global-results>
+    sb: make this the path to your login action...........where to use how later
+         this could also be a redirectAction type.
+    <result name="loginRedirect" type="redirect">/login</url>
+</global-results>  -->
+ 
+ 
+<!--  <constant name="struts.enable.SlashesInActionNames" value="true"/> -->
+<!-- 	<package name= " login"   namespace="/"  extends="struts-default"   > -->
+	<package name= "default"	namespace="/"   extends="struts-default"   >
+		<result-types>
+			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<action name="TestLogin" class="com.schooltrix.actions.TestLogin"  method="execute">
+		<result name="successView" >/jsp/success.jsp</result>
+		<result name="welcome"  type="tiles" >/test</result>
+		</action>
+		
+		<action name="login" 	class="com.schooltrix.actions.LoginAction" method="execute">
+				<result name="succ" type="tiles">/AfterLoginDef</result>
+				<result name="fails" type="redirectAction">BeforeLogin</result>			
+				<result name="SA_createInst" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">SA_inst1</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>
+				<result name="AddSchool" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">EditSchools</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>			
+				<result name="parentViewTemp" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">ParentStartUp</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>			
+				<result name="studentViewTemp" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">StudentStartUp</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>			
+				<result name="StaffViewTemp" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">StaffStartUp</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>			
+						
+		</action>
+
+		<action name="accessdenied" >
+			<result>/jsp/accessdenied.jsp</result>
+		</action>
+		
+		<action name="logout" >
+			<result>/jsp/accessdenied.jsp</result>
+		</action>
+		
+		<action name="signout" >
+			<result>/jsp/SignOut.jsp</result>
+		</action>
+		
+		
+			<!--<action name="adduser" 	class="com.schooltrix.actions.AddUserAction" method="execute">
+				<result name="success">/jsp/success.jsp</result>-->
+			<!-- 	<result name="fails" type="redirect">/jsp/success.jsp</result> --><!-- change later to redirct --><!--
+				<result name="fails" type="redirectAction">AfterLogin</result>
+				</action>
+ 			<action name="addnonadminuser" 	class="com.schooltrix.actions.AddUserAction" method="addNonAdminUser">
+				<result name="success">/jsp/success.jsp</result>
+				<result name="fails" type="redirect">/jsp/success.jsp</result>change later to redirct
+				<result name="fails" type="redirectAction">AfterLogin</result>
+				</action> -->
+				
+				
+		<action name="previewSMS" class="com.schooltrix.actions.SMSCampaign" method="execute">
+					<result name="previewJsp"  type="tiles" >/previewSMSDef</result>
+					 <result name="previewJspFail" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">UserSMS</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>
+		</action>
+
+		<action name="previewEmail" class="com.schooltrix.actions.EmailCampaign" method="execute">
+					<result name="previewEmailJsp"  type="tiles" >/previewEmailDef</result>
+					 <result name="previewEmailJspFail" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">UserEmail</param>
+	    		     <param name="p2">SA_inst2</param>
+	    		     </result>
+		</action>
+		
+		
+				
+				
+		<action name="addnonadminuser"    class="com.schooltrix.actions.AddUserAction"  method="addNonAdminUser">
+			 <interceptor-ref name="fileUpload">
+			    <!--     <param name="maximumSize">2097152</param> -->
+			        <param name="maximumSize">1048576</param><!-- 1mb -->
+			        <param name="allowedTypes">
+			            image/png,image/gif,image/jpeg,image/pjpeg
+			        </param>
+			 </interceptor-ref>
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+			     <result name="successSaff" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">AddNonAdminUser</param>
+	    		     <param name="p2">ffats</param>
+				</result>
+			     <result name="successStu" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">AddNonAdminUser</param>
+	    		     <param name="p2">uts</param>
+				</result>
+			     <result name="successPA" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">AddNonAdminUser</param>
+	    		     <param name="p2">rap</param>
+				</result>
+				  <!--   <result name="success">/jsp/success.jsp</result> -->
+				  <!--   <result name="success"  type="tiles" >/adminNonAddUser</result> -->
+
+		</action>
+		
+						
+		<action name="addadminuser"    class="com.schooltrix.actions.AddUserAction"  method="addAdminUser">
+			<interceptor-ref name="fileUpload">
+			    <!--     <param name="maximumSize">2097152</param> -->
+			        <param name="maximumSize">1048576</param><!-- 1mb -->
+			        <param name="allowedTypes">
+			            image/png,image/gif,image/jpeg,image/pjpeg
+			        </param>
+			 </interceptor-ref>
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+				 <result name="success" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">AddAdminUser</param>
+	    		     <param name="p2">SA_inst2</param>
+				</result>				 			    
+					  <!--   <result name="success"  type="tiles" >/adminNonAddUser</result> -->
+		</action>
+				
+		<action name="uploadDocActionName"    class="com.schooltrix.actions.UploadDocAction"  method="uploadDocument">
+		    <interceptor-ref name="fileUpload">
+			    <!--     <param name="maximumSize">2097152</param> -->
+			      <!--   <param name="maximumSize">1048576</param> --><!-- 1mb -->
+			     <!--   <param name="allowedTypes">
+			            image/png,image/gif,image/jpeg,image/pjpeg
+			        </param>  -->
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+			   <result name="success" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">UploadDocuments</param>
+	    		     <param name="p2">SA_inst2</param>
+			  </result> 
+				  <!--   <result name="success">/jsp/success.jsp</result> -->
+				  <!--   <result name="success"  type="tiles" >/adminNonAddUser</result> -->
+
+		</action>
+		<action name="editedDocumentSaveAction"    class="com.schooltrix.actions.UploadDocAction"  method="editedDocumentSave">
+		    <interceptor-ref name="fileUpload">
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+			   <result name="success" type="redirectAction">
+					 <param name="actionName">Access</param>
+	    		     <param name="p1">UploadDocuments</param>
+	    		     <param name="p2">SA_inst2</param>
+			  </result> 
+				  <!--   <result name="success">/jsp/success.jsp</result> -->
+				  <!--   <result name="success"  type="tiles" >/adminNonAddUser</result> -->
+
+		</action>
+				
+				
+		<action name="Access" class="com.schooltrix.actions.Access"  method="execute">
+			<result name="institutionmaster"  type="tiles" >/test</result>
+			<result name="superInstitutionC"  type="tiles" >/superInstitutionC</result>
+			<result name="adminAddUser"  type="tiles" >/adminAddUserDef</result>
+
+			<result name="adminNonAddUser_uts"   type="tiles"	>/adminNonAddUser</result>
+			<result name="adminNonAddUser_ffats"   type="tiles"	>/adminNonAddUser</result>
+			<result name="adminNonAddUser_rap"   type="tiles"	>/adminNonAddUser</result>
+
+			<result name="userSMS"  type="tiles" >/userSMSDef</result>
+			<result name="userEmail"  type="tiles" >/userEmailDef</result>
+			
+			<result name="uploadDocuments"  type="tiles" >/uploadDocumentsDef</result>
+
+			<result name="editPreviousUploads"  type="tiles" >/editUploadDocumentsDef</result>
+			
+			<result name="uploadDocumentsEdit"  type="redirectAction" >
+					<param name="actionName">PreviousUploadEdit</param>
+	    		     <param name="p1">UploadDocuments</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">Edit</param>
+			</result>
+			
+			
+			<result name="schoolMaster"  type="tiles" >/schoolMasterdef</result>
+			<result name="branchMaster"  type="tiles" >/branchMaster</result>
+				
+			<result name="classMaster"  type="tiles" >/classMaster</result>
+			<result name="sectionMaster"  type="tiles" >/sectionMaster</result>
+			<result name="studentMaster"  type="tiles" >/studentMaster</result>
+			
+			<result name="classMasterUI"  type="tiles" >/classMasterUIDef</result>
+			<result name="sectionMasterUI"  type="tiles" >/sectionMasterUIDef</result>
+			
+			
+			<!--Temp.....for Time being  -->
+			<result name="parentView"  type="tiles" >/parentViewDef</result>
+			<result name="studentView"  type="tiles" >/studentViewDef</result>
+			<result name="staffView"  type="tiles" >/staffViewDef</result>
+			<result name="attendanceMark"  type="tiles" >/attendanceMarkDef</result>
+			<result name="attendanceView"  type="tiles" >/attendanceViewDef</result>
+
+			<result name="unauthorised" type="redirectAction">
+					 <param name="actionName">BeforeLogin</param>
+           </result> 
+			
+			<result name="comeSOON" type="tiles"  >/comingSOONDef</result>
+			
+			<result name="successView" >/jsp/success.jsp</result>
+			
+			<result name="editPreviousSchools"  type="tiles" >/editPreviousSchoolsDef</result>
+			
+			<result name="editPreviousBranches"  type="tiles" >/editPreviousBrnchesDef</result>
+
+			<result name="editStudents"  type="tiles" >/editStudentsDef</result>
+			<result name="editParents"  type="tiles" >/editParentsDef</result>
+			<result name="editStaffs"  type="tiles" >/editStaffsDef</result>
+			
+			<result name="appStore"  type="tiles" >/appStoreDef</result>
+			
+			<result name="schoolMasterEdit"  type="redirectAction" >
+					<param name="actionName">PreviousSchoolEdit</param>
+	    		     <param name="p1">schoolMaster</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">Edit</param>
+			</result>
+			
+			<result name="branchMasterEdit"  type="redirectAction" >
+					<param name="actionName">PreviousBranchEdit</param>
+	    		     <param name="p1">branchMaster</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">Edit</param>
+			</result>
+			
+			<result name="adminNonAddUser_uts_edit"  type="redirectAction" >
+					<param name="actionName">PreviousStudentEdit</param>
+	    		     <param name="p1">studentMaster</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">EditStu</param>
+			</result>
+			<result name="adminNonAddUser_rap_edit"  type="redirectAction" >
+					<param name="actionName">PreviousParentEdit</param>
+	    		     <param name="p1">parentMaster</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">EditPar</param>
+			</result>
+			<result name="adminNonAddUser_ffats_edit"  type="redirectAction" >
+					<param name="actionName">PreviousStaffEdit</param>
+	    		     <param name="p1">staffMaster</param><!-- after use $ for p2 ud_id -->
+	    		     <param name="p2">EditStaff</param>
+			</result>
+			
+			
+			
+			
+		</action>
+	
+		<action name="AfterLogin" >
+			<result>/jsp/HomePage.jsp</result>
+		</action>
+		
+		
+		
+		<action name="BeforeLogin" >
+			<result>/jsp/HomePage.jsp</result>
+		</action>
+		
+		<action name="adduserForm" >
+			<result  type="tiles" >/adduserFormDef</result>
+		</action>
+		
+		<action name="Test" >
+		    <result  type="tiles">/testdef</result>
+		</action>
+				
+		<action name="PreviousUploadEdit" class="com.schooltrix.actions.PreviousUploadEditAction" method="fetchUploadJsonForEdit">
+		 <result  name="success" type="tiles">/uploadDocumentsDef</result>
+		 <result  name="fail" type="tiles">/uploadDocumentsDef</result>
+<!-- 		 <result  name="fail" type="tiles">/editUploadDocumentsDef</result> -->
+		</action>
+				
+		<action name="classmasterXL" class="com.schooltrix.actions.ClassMasterUploadAction" >
+				 <interceptor-ref name="defaultStack"></interceptor-ref>
+				  <interceptor-ref name="fileUpload"></interceptor-ref> 
+						<result name="success" type="redirectAction">
+									 <param name="actionName">Access</param>
+					    		     <param name="p1">classMaster</param>
+					    		     <param name="p2">SA_inst2</param>
+							</result>
+						<result name="input" type="redirectAction">
+									 <param name="actionName">Access</param>
+					    		     <param name="p1">classMaster</param>
+					    		     <param name="p2">SA_inst2</param>
+						</result>
+		</action>
+		
+		<action name="studentMasterXL" class="com.schooltrix.actions.StudentMasterUploadAction" >
+ 			<interceptor-ref name="defaultStack"></interceptor-ref>
+		    <interceptor-ref name="fileUpload"></interceptor-ref> 
+				<result name="success" type="redirectAction">
+							 <param name="actionName">StudentXLStatus</param>
+			    		     <param name="p1">studentMaster</param>
+			    		     <param name="p2">SA_inst2</param>
+					</result>
+				<result name="input" type="redirectAction">
+							 <param name="actionName">Access</param>
+			    		     <param name="p1">studentMaster</param>
+			    		     <param name="p2">SA_inst2</param>
+				</result>
+		</action>
+	
+		<action name="StudentXLStatus" >
+			<result  type="tiles" >/StudentXLStatusDef</result>
+		</action>
+		
+		<action name="sectionMasterXL" class="com.schooltrix.actions.SectionMasterUploadAction" >
+ 			<interceptor-ref name="defaultStack"></interceptor-ref>
+		    <interceptor-ref name="fileUpload"></interceptor-ref> 
+				<result name="success" type="redirectAction">
+							 <param name="actionName">Access</param>
+			    		     <param name="p1">sectionMaster</param>
+			    		     <param name="p2">SA_inst2</param>
+					</result>
+				<result name="input" type="redirectAction">
+							 <param name="actionName">Access</param>
+			    		     <param name="p1">sectionMaster</param>
+			    		     <param name="p2">SA_inst2</param>
+				</result>
+		</action>
+		
+		
+		
+	   <action name="download" class="com.schooltrix.actions.DownloadAction">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">1024</param>               
+	       </result>  
+      </action>
+	   <action name="downloadUploadDoc" class="com.schooltrix.actions.UploadDocDownloadAction">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">1024</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+		
+		<action name="ViewAllListParent" >
+			<result  type="tiles" >/ViewAllListParentDef</result>
+		</action>
+		
+			   <action name="downloadUploadDocSearch" class="com.schooltrix.actions.DownloadUploadSearch" method="downloadUploadDocSearch">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">2048</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+	  
+	  <action name="downloadSchoolSearch" class="com.schooltrix.actions.DownloadSchoolSearch" method="downloadSchoolSearch">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">2048</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+      
+      <action name="PreviousSchoolEdit" class="com.schooltrix.actions.SchoolEditAction" method="fetchSchoolJsonForEdit">
+		 <result  name="success" type="tiles">/schoolMasterdef</result>
+		 <result  name="fail" type="tiles">/schoolMasterdef</result>
+<!-- 		 <result  name="fail" type="tiles">/editUploadDocumentsDef</result> -->
+		</action>
+
+		
+		<action name="downloadBranchSearch" class="com.schooltrix.actions.DownloadBranchSearch" method="downloadBranchSearch">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">2048</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+      
+      <action name="PreviousBranchEdit" class="com.schooltrix.actions.BranchEditAction" method="fetchBranchJsonForEdit">
+		 <result  name="success" type="tiles">/branchMaster</result>
+		 <result  name="fail" type="tiles">/branchMaster</result>
+	</action>
+	
+		 <action name="downloadStudentSearch" class="com.schooltrix.actions.DownloadStudentSearch" method="downloadStudentSearch">   
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">2048</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+      
+		 <action name="downloadParentSearch" class="com.schooltrix.actions.DownloadStudentSearch" method="downloadParentSearch">   
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+<!-- 				  <param name="contentDisposition">attachment;filename=\"${fileName}\"</param> -->
+				  <param name="bufferSize">2048</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+      
+	  <action name="downloadImage" class="com.schooltrix.actions.PhotoDownloadAction">      
+	       <result name="success" type="stream">  
+			       <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${fileName}"</param>
+				  <param name="bufferSize">1024</param>               
+	       </result>  
+	       <result name="fail" type="redirectAction">BeforeLogin</result>	
+      </action>
+	
+	 <action name="PreviousStudentEdit" class="com.schooltrix.actions.UserEditAction" method="fetchStudentJsonForEdit">
+		 <result  name="success" type="tiles">/adminNonAddUser</result>
+		 <result  name="fail" type="tiles">/adminNonAddUser</result>
+	</action>
+	
+	<action name="PreviousParentEdit" class="com.schooltrix.actions.UserEditAction" method="fetchParentJsonForEdit">
+		 <result  name="success" type="tiles">/adminNonAddUser</result>
+		 <result  name="fail" type="tiles">/adminNonAddUser</result>
+	</action>
+	<action name="PreviousStaffEdit" class="com.schooltrix.actions.UserEditAction" method="fetchStaffJsonForEdit">
+		 <result  name="success" type="tiles">/adminNonAddUser</result>
+		 <result  name="fail" type="tiles">/adminNonAddUser</result>
+	</action>
+		
+	<action name="editedNonAdminUserSaveAction"    class="com.schooltrix.actions.AddUserAction"  method="editNonAdminUserSave">
+		 <interceptor-ref name="fileUpload">
+		    <!--     <param name="maximumSize">2097152</param> -->
+		    <!--     <param name="maximumSize">1048576</param>
+		        <param name="allowedTypes">
+		            image/png,image/gif,image/jpeg,image/pjpeg
+		        </param> -->
+		 </interceptor-ref>
+		 <interceptor-ref name="defaultStack"></interceptor-ref>
+		     <result name="successSaff" type="redirectAction">
+				 <param name="actionName">Access</param>
+    		     <param name="p1">AddNonAdminUser</param>
+    		     <param name="p2">ffats</param>
+			</result>
+		     <result name="successStu" type="redirectAction">
+				 <param name="actionName">Access</param>
+    		     <param name="p1">AddNonAdminUser</param>
+    		     <param name="p2">uts</param>
+			</result>
+		     <result name="successPar" type="redirectAction">
+				 <param name="actionName">Access</param>
+    		     <param name="p1">AddNonAdminUser</param>
+    		     <param name="p2">rap</param>
+			</result>
+			  <!--   <result name="success">/jsp/success.jsp</result> -->
+			  <!--   <result name="success"  type="tiles" >/adminNonAddUser</result> -->
+
+	</action>	
+		
+		
+	</package>
+		
+</struts>    

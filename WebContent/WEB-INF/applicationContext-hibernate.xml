@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ -->
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			 <value>/WEB-INF/jdbc.properties</value>
+ 		<!--<value>C:/Program Files/Apache Software Foundation/Tomcat 7.0/webapps/Schooltrix/WEB-INF/jdbc.properties</value>  -->
+		</property>
+	</bean>
+
+	<!-- com.mchange.v2.c3p0.ComboPooledDataSource 
+	org.apache.commons.dbcp.BasicDataSource-->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="initialSize">
+			<value>${jdbc.initial_pool_size}</value>
+		</property>
+		<property name="maxActive">
+			<value>${jdbc.max_pool_size}</value>
+		</property>
+		<property name="minIdle">
+			<value>${jdbc.min_idle}</value>
+		</property>
+		<property name="maxIdle">
+			<value>${jdbc.max_idle}</value>
+		</property>
+		<property name="poolPreparedStatements">
+			<value>${jdbc.pool_prepared_statements}</value>
+		</property>
+		<property name="defaultAutoCommit">
+			<value>${jdbc.default_auto_commit}</value>
+		</property>
+		<property name="defaultTransactionIsolation">
+			<value>${jdbc.default_transaction_isolation}</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>${jdbc.test_on_borrow}</value>
+		</property>
+		<property name="testOnReturn">
+			<value>${jdbc.test_on_return}</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>${jdbc.test_while_idle}</value>
+		</property>
+		<property name="maxWait">
+			<value>${jdbc.max_wait}</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>${jdbc.min_evictable_idle_time_millis}</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>${jdbc.time_between_eviction_runs_millis}</value>
+		</property>
+
+	</bean>	
+
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource"><ref bean="dataSource"/> </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">false</prop>
+			 	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<!-- 	 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>  --><!--for transaction purpose not tested-2013-09-03 -->
+				<prop key="hibernate.generate_statistics">true</prop>
+				<!-- <prop key="hibernate.cache.use_query_cache">true</prop> -->
+				<prop key="hibernate.connection.release_mode">auto</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+				<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>
+			</props>
+		</property>
+	
+		<property name="mappingResources">
+			<list>
+				<value>com/schooltrix/hibernate/BranchMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/BranchStaffMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/ClassBranchMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/ClassMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/CountryMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/InstitutionMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/ParentStudentMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/ParentDetails.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SchoolMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SectionClassMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SectionMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SectionTeacherMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SmsCredits.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StaffDetails.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StateMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StudentAdmissionDetail.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StudentDetails.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UserDetails.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UserMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UserSchoolMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UserType.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SentSms.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SentEmail.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SubjectMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UploadDocuments.hbm.xml</value>
+				<value>com/schooltrix/hibernate/DomainControl.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StudentSectionMap.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StudentxlErrorTemp.hbm.xml</value>
+				<value>com/schooltrix/hibernate/FranchiseMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/NotificationMaster.hbm.xml</value>
+				<value>com/schooltrix/hibernate/QuickSms.hbm.xml</value>
+				
+				<value>com/schooltrix/hibernate/UploadDocument.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UploadDocumentClassBranchMap.hbm.xml</value>
+				
+				<value>com/schooltrix/hibernate/UploadDocumentHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/UploadDocumentClassBranchMapHistory.hbm.xml</value>
+
+				<value>com/schooltrix/hibernate/DocumentSearchHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SchoolSearchHistory.hbm.xml</value>
+				
+				<value>com/schooltrix/hibernate/SchoolMasterHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/BranchSearchHistory.hbm.xml</value>
+	
+				<value>com/schooltrix/hibernate/BranchMasterHistory.hbm.xml</value>
+
+				<value>com/schooltrix/hibernate/StudentSearchHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StudentDetailsHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/ParentSearchHistory.hbm.xml</value>
+
+				<value>com/schooltrix/hibernate/ParentDetailsHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StaffSearchHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/StaffDetailsHistory.hbm.xml</value>
+
+				<value>com/schooltrix/hibernate/ClassMasterHistory.hbm.xml</value>
+				<value>com/schooltrix/hibernate/SectionMasterHistory.hbm.xml</value>
+				
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+		<!--======================== BUSINESS OBJECT DEFINITIONS========================-->
+
+	<bean id="ClassMasterDAO" class="com.schooltrix.daos.ClassMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="BranchMasterDAO" class="com.schooltrix.daos.BranchMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="CountryMasterDAO" class="com.schooltrix.daos.CountryMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="InstitutionMasterDAO" class="com.schooltrix.daos.InstitutionMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="ParentDetailsDAO" class="com.schooltrix.daos.ParentDetailsDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="SchoolMasterDAO" class="com.schooltrix.daos.SchoolMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="SectionMasterDAO" class="com.schooltrix.daos.SectionMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="StaffDetailsDAO" class="com.schooltrix.daos.StaffDetailsDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="StateMasterDAO" class="com.schooltrix.daos.StateMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="StudentDetailsDAO" class="com.schooltrix.daos.StudentDetailsDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	<bean id="UserMasterDAO" class="com.schooltrix.daos.UserMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<bean id="UserTypeMasterDAO" class="com.schooltrix.daos.UserTypeMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<bean id="SMSCreditsDAO" class="com.schooltrix.daos.SMSCreditsDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<bean id="SentSmsDAO" class="com.schooltrix.daos.SentSmsDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<bean id="SentEmailDAO" class="com.schooltrix.daos.SentEmailDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<bean id="UploadDocDAO" class="com.schooltrix.daos.UploadDocDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+
+	<bean id="DomainContlDAO" class="com.schooltrix.daos.DomainDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+
+	<bean id="NotificationMasterDAO" class="com.schooltrix.daos.NotificationMasterDAOImpl">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean>
+	
+	<!-- indivdual sessionss..test -->
+	 <bean id="SMSCampaignSession" class="com.schooltrix.daos.SMSCampaignSession">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean> 
+	<bean id="EmailCampaignSession" class="com.schooltrix.daos.EmailCampaignSession">
+		<property name="sessionFactory"><ref local="sessionFactory"/></property>
+	</bean> 
+	
+	
+	<!-- Transaction AOP setting -->
+	
+	<bean id="ClassMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="ClassMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="BranchMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="BranchMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="CountryMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="CountryMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+	<bean id="InstitutionMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="InstitutionMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+		<bean id="ParentDetailsHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="ParentDetailsDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="SchoolMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="SchoolMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="SectionMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="SectionMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="SMSCreditsHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="SMSCreditsDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="StaffDetailsHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="StaffDetailsDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="StateMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="StateMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<bean id="StudentDetailsHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="StudentDetailsDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+			 	<prop key="store*">PROPAGATION_REQUIRED</prop> 
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<!-- <prop key="*">PROPAGATION_REQUIRED</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<bean id="UserMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="UserMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<bean id="UserTypeMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="UserTypeMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="SentSmsHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="SentSmsDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+		<bean id="SentEmailHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="SentEmailDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+		<bean id="UploadDocHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="UploadDocDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="DomainContlHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="DomainContlDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="NotificationMasterHibernateDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref local="transactionManager"/></property>
+		<property name="target"><ref local="NotificationMasterDAO"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED</prop>
+				<prop key="find*">PROPAGATION_REQUIRED</prop>
+				<prop key="load*">PROPAGATION_REQUIRED</prop>
+				<prop key="store*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+		
+		</beans>
+
+
+	
+	
+
+

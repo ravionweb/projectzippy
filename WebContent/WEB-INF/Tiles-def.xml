@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout" template="/jsp/BaseLayout.jsp">
+        <put-attribute name="header" value="/jsp/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/jsp/footer.jsp" />
+    </definition>
+	 <definition name="/superInstitutionC" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/institutionmaster.jsp" />
+    </definition>
+
+	 <definition name="/adminNonAddUser" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/AddNonAdminUser.jsp" />
+    </definition>
+	
+	 <definition name="/adminAddUserDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/AddUser.jsp" />
+    </definition>
+    <definition name="/classMaster" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/ClassMaster.jsp" />
+    </definition>
+    <definition name="/studentMaster" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/StudentMaster.jsp" />
+    </definition>
+
+    <definition name="/classMasterUIDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/ClassMasterUI.jsp" />
+    </definition>
+    <definition name="/sectionMasterUIDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/SectionMasterUI.jsp" />
+    </definition>
+
+
+
+    <definition name="/StudentXLStatusDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/StuUploadXlStatus.jsp" />
+    </definition>
+    
+  <definition name="/sectionMaster" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/SectionMaster.jsp" />
+    </definition>
+    <definition name="/branchMaster" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/branchmaster.jsp" />
+    </definition>
+    
+
+	<definition name="/userSMSDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/SMSCampaign.jsp" />
+    </definition>
+	<definition name="/userEmailDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EmailCampaign.jsp" />
+    </definition>
+    
+	<definition name="/previewSMSDef" extends="baseLayout">
+        <!-- <put-attribute name="body" value="/jsp/SMSPreview.jsp" /> -->
+        <put-attribute name="body" value="/jsp/SMSPreview.jsp" />
+    </definition>
+	
+	<definition name="/previewEmailDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EmailPreview.jsp" />
+    </definition>
+
+	<definition name="/uploadDocumentsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/UploadDocuments.jsp" />
+    </definition>
+
+	<definition name="/editUploadDocumentsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditPreviousUploads.jsp" />
+    </definition>
+
+<!-- 	<definition name="/parentViewDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/ParentTemp.jsp" />
+    </definition> -->
+	<definition name="/parentViewDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/ParentDashboard.jsp" />
+    </definition>
+
+	<definition name="/studentViewDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/StudentDashBoard.jsp" />
+    </definition>
+
+	<definition name="/staffViewDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/TeacherDashBoard.jsp" />
+    </definition>
+	<definition name="/attendanceMarkDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/TeacherAttendanceMark.jsp" />
+    </definition>
+	<definition name="/attendanceViewDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/TeacherAttendanceView.jsp" />
+    </definition>
+
+
+  <definition name="/testdef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/TestFile.jsp" />
+    </definition>
+    
+    
+      <definition name="/schoolMasterdef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/schoolmaster.jsp" />
+    </definition>
+
+        
+   <definition name="/AfterLoginDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/institutionmaster.jsp" />
+    </definition>
+
+   <definition name="/ViewAllListParentDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/ViewAllListDeatils.jsp" />
+    </definition>   
+
+   <definition name="/comingSOONDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/comingSOON.jsp" />
+    </definition>   
+    
+   <definition name="/editPreviousSchoolsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditSchools.jsp" />
+    </definition>   
+
+   <definition name="/editStudentsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditUserMaster.jsp" />
+    </definition>   
+   <definition name="/editParentsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditUserMaster.jsp" />
+    </definition>   
+   <definition name="/editStaffsDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditUserMaster.jsp" />
+    </definition>   
+
+   <definition name="/appStoreDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/AppStore.jsp" />
+    </definition>   
+    
+   <definition name="/editPreviousBrnchesDef" extends="baseLayout">
+        <put-attribute name="body" value="/jsp/EditBranches.jsp" />
+    </definition>   
+    
+    
+</tiles-definitions>

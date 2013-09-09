@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/bootstrap-jquery.js"></script>
+<script type="text/javascript">
+       function addRemoveItems(){
+      
+         var dd = jQuery('#one').val();
+         var dd1 = jQuery('#two').val();
+       
+        var data='{"text1":"test1.do","text2":"test2.do","text3":{"abc":"abc.do","def":"def.do","xyz":"xyz.do"},"text4":{"123":"abc.do","456":"def.do","789":"xyz.do"},"text5":{"123":"abc.do","456":"def.do","789":"xyz.do"}}';
+        //'{"result":true,"count":1}'
+        var items =  JSON.parse(data);
+
+            var $ul = $("#two");
+            jQuery("#two li").remove();   
+            jQuery("#two ul").remove();   
+           
+        $.each(items, function(index, item) {
+           
+             
+             if(typeof item == 'object'){
+           
+                         var itemsInner =item;
+                         var innerhtml1="";
+                         innerhtml1='<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#">'+index +' <b class="caret"></b></a><ul class="dropdown-menu">';
+                     $.each(itemsInner, function(indexinner, iteminner) {
+                innerhtml1=innerhtml1+'<li><a href="#'+iteminner+'">'+indexinner+'</a></li>';
+                           });
+                           innerhtml1=innerhtml1+'</ul></li>';
+                        $ul.append(innerhtml1);   
+                         
+                         
+              }else{
+               $ul.append('<li><a href="#'+item+'">'+index+'</a></li>');
+               }
+              });
+                   
+       
+            /*jQuery("#two li").remove();       
+        $("#two li").append("<li id='someID'>...fdfdfdf......</li>");*/
+    }
+
+    </script>
+<meta charset="utf-8">
+<title>Welcome</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<!--fav and touch icons -->
+<link rel="shortcut icon" href="ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+<!-- Static navbar -->
+<div></div>
+<div class="navbar navbar-fixed-top">
+
+  <div class="navbar-inner">
+    <div class="container"><a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+     <div class="nav-collapse collapse" id='one'>
+        <ul class="nav" id='two'>
+          <li id='ii'><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+           <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin1 <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin2 <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li class="active"><a href="#">Admin</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+      <div style="padding-top: 80px;"></div>
+      <div class="navbar-inner">
+    <div class="container"><a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+     <div class="nav-collapse collapse" id='one1'>
+        <ul class="nav" id='two1'>
+          <li id='ii'><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+           <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin1 <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin2 <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li class="active"><a href="#">Admin</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+     
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- /container -->
+<div style="padding-top: 100px;">
+<INPUT TYPE="button" VALUE="see" ONCLICK="addRemoveItems()">
+
+
+
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

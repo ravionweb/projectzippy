@@ -1,0 +1,74 @@
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://directwebremoting.org/schema/dwr20.dtd">
+<!-- <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr/dwr30.dtd"> -->
+<dwr>
+  <allow>
+  <convert match="java.lang.Exception" converter="exception"/>
+  <!-- 	<create creator="new" javascript="VTGateWayDWR">
+		<param name="class" value="com.vantagetrade.util.VTGateWayDWR"/>
+    </create>
+     -->
+      <create creator="new" javascript="InstitutionMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.InstitutionMasterDWR"/>
+    </create>
+    
+     <create creator="new" javascript="UserTypeMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.UserTypeMasterDWR"/>
+    </create>
+    
+    <create creator="new" javascript="UserMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.UserMasterDWR"/>
+    </create>
+    
+     <create creator="new" javascript="SMSCreditsDWR">
+		<param name="class" value="com.schooltrix.dwr.SMSCreditsDWR"/>
+    </create>
+    
+     <create creator="new" javascript="SentSMSDWR">
+		<param name="class" value="com.schooltrix.dwr.SentSMSDWR"/>
+    </create>
+     
+     <create creator="new" javascript="SentEmailDWR">
+		<param name="class" value="com.schooltrix.dwr.SentEmailDWR"/>
+    </create>
+       
+     <create creator="new" javascript="ClassMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.ClassMasterDWR"/>
+    </create>
+    
+    <create creator="new" javascript="EmailDomainDWR">
+		<param name="class" value="com.schooltrix.dwr.EmailCheckDWR"/>
+    </create>
+    
+    <create creator="new" javascript="DomainControllDWR">
+		<param name="class" value="com.schooltrix.dwr.DomainControllDWR"/>
+    </create>
+     <create creator="new" javascript="BranchMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.BranchMasterDWR"/>
+    </create>
+     <create creator="new" javascript="SchoolMasterDWR">
+		<param name="class" value="com.schooltrix.dwr.SchoolMasterDWR"/>
+    </create>
+    
+    <create creator="new" javascript="StudentDWR">
+		<param name="class" value="com.schooltrix.dwr.StudentDWR"/>
+    </create>
+    
+    <create creator="new" javascript="NotificationGetDWR">
+		<param name="class" value="com.schooltrix.dwr.NotificationGetDWR"/>
+    </create>
+   
+    <create creator="new" javascript="AssignmentGetDWR">
+		<param name="class" value="com.schooltrix.dwr.AssignmentGetDWR"/>
+    </create>
+    <create creator="new" javascript="ParentDetailsDWR">
+		<param name="class" value="com.schooltrix.dwr.ParentDetailsDWR"/>
+    </create>
+
+	<create creator="new" javascript="StaffDWR" >
+		<param name="class" value="com.schooltrix.dwr.StaffDWR"></param>
+	</create>
+    
+  </allow>
+</dwr>
